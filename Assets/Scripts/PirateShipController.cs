@@ -17,11 +17,15 @@ public class PirateShipController : MonoBehaviour
     private float SeaSize = 500.0f;
     private float RotationSpeed = 180.0f;
 
+    #region New Code from Sean
     private int HPMax = 100;
     [SerializeField]
     private int CurrentHP;
 
-    #region New Code from Sean
+    [SerializeField]
+    private bool isInvincible;
+
+    
     private void OnEnable()
     {
         CurrentHP = HPMax;
@@ -29,13 +33,16 @@ public class PirateShipController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<CannonBall>())
+        if(!isInvincible)
         {
-            CurrentHP -= 10;
-            Destroy(collision.gameObject);
-            if(CurrentHP <= 0)
+            if (collision.gameObject.GetComponent<CannonBall>())
             {
-                Sink();
+                CurrentHP -= 10;
+                Destroy(collision.gameObject);
+                if (CurrentHP <= 0)
+                {
+                    Sink();
+                }
             }
         }
     }
@@ -56,12 +63,15 @@ public class PirateShipController : MonoBehaviour
 
     public void SetInvincible(float f)
     {
-        //StartCoroutine(BeInvincibleFor(f));
+        StartCoroutine(BeInvincibleFor(f));
+        //Add some fansy visual effect here.
     }
 
     IEnumerator BeInvincibleFor(float f)
     {
-        yield return null;//Method not implemented yet. 
+        isInvincible = true;
+        yield return new WaitForSeconds(f);
+        isInvincible = false;
     }
 
     #endregion
