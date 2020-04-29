@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,55 @@ public class PirateShipController : MonoBehaviour
     private float SeaSize = 500.0f;
     private float RotationSpeed = 180.0f;
 
+    private int HPMax = 100;
+    [SerializeField]
+    private int CurrentHP;
+
+    #region New Code from Sean
+    private void OnEnable()
+    {
+        CurrentHP = HPMax;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<CannonBall>())
+        {
+            CurrentHP -= 10;
+            Destroy(collision.gameObject);
+            if(CurrentHP <= 0)
+            {
+                Sink();
+            }
+        }
+    }
+
+    private void Sink()
+    {
+        Destroy(this.gameObject);//Temp method to destroy a ship when HP is 0. Add visual effect or whatever later.
+    }
+
+    public void AdjustHP(int i)
+    {
+        this.CurrentHP += i;
+        if (CurrentHP > HPMax)
+            CurrentHP = HPMax;
+        if (CurrentHP <= 0)
+            Sink();
+    }
+
+    public void SetInvincible(float f)
+    {
+        //StartCoroutine(BeInvincibleFor(f));
+    }
+
+    IEnumerator BeInvincibleFor(float f)
+    {
+        yield return null;//Method not implemented yet. 
+    }
+
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +78,7 @@ public class PirateShipController : MonoBehaviour
     }
 
     public void StartBattle() {
-        Debug.Log("test");
+        //Debug.Log("test");
         StartCoroutine(ai.RunAI());
     }
 
