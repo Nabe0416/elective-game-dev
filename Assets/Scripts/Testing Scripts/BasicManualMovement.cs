@@ -10,7 +10,7 @@ public class BasicManualMovement : MonoBehaviour
     private float inputMovement;
 
     //Health
-    public float Health = 100;
+    private float Health = 100;
     public GameObject Healthbar;
     //Text for hovering
     public GameObject Name;
