@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PondAI : BaseAI
+public class NoahAI : BaseAI
 {
     public override IEnumerator RunAI() {
         while (true)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,5 +56,10 @@ public class BaseAI
 
     public virtual IEnumerator RunAI() {
         yield return null;
+    }
+
+    public static implicit operator string(BaseAI v)
+    {
+        throw new NotImplementedException();
     }
 }

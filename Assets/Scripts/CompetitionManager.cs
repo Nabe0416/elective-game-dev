@@ -16,15 +16,16 @@ public class CompetitionManager : MonoBehaviour
             new IljaAI(), 
             new AlexAI(), 
             new SeanAI(), 
-            new PondAI()
+            new NoahAI()
         };
 
         for (int i = 0; i < 4; i++)
         {
-            GameObject pirateShip = Instantiate(PirateShipPrefab, SpawnPoints[i].position, SpawnPoints[i].rotation);
-            PirateShipController pirateShipController = pirateShip.GetComponent<PirateShipController>();
-            pirateShipController.SetAI(aiArray[i]);
-            pirateShips.Add(pirateShipController);
+
+                GameObject pirateShip = Instantiate(PirateShipPrefab, SpawnPoints[i].position, SpawnPoints[i].rotation);
+                PirateShipController pirateShipController = pirateShip.GetComponent<PirateShipController>();
+                pirateShipController.SetAI(aiArray[i]);
+                pirateShips.Add(pirateShipController);
         }
         
     }

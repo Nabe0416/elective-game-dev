@@ -11,6 +11,8 @@ public class PirateShipController : MonoBehaviour
     public Transform CannonRightSpawnPoint = null;
     public GameObject Lookout = null;
     public GameObject[] sails = null;
+    public GameObject Name;
+    public GameObject HealthBar;
     private BaseAI ai = null;
 
     private float BoatSpeed = 100.0f;
@@ -39,6 +41,9 @@ public class PirateShipController : MonoBehaviour
             {
                 CurrentHP -= 10;
                 Destroy(collision.gameObject);
+
+                //code added by Alex for Health
+                HealthBar.GetComponentInChildren<TextMesh>().text = CurrentHP + " HP";
                 if (CurrentHP <= 0)
                 {
                     Sink();
@@ -79,12 +84,16 @@ public class PirateShipController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Code Added by alex for healthbar
+        HealthBar.GetComponentInChildren<TextMesh>().text = CurrentHP + " HP";
     }
 
     public void SetAI(BaseAI _ai) {
-        ai = _ai;
+        ai = _ai;   
         ai.Ship = this;
+        #region New Code from Alex
+        Name.GetComponentInChildren<TextMesh>().text = _ai.ToString();
+        #endregion
     }
 
     public void StartBattle() {
