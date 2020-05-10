@@ -51,8 +51,8 @@ MonoBehaviour:
   RatioInvin: 5
   MaxPickups: 5
   FieldSize: {x: 500, y: 500}
-  LogResultInConsole: 1
-  StartGenerating: 1
+  LogResultInConsole: 0
+  StartGenerating: 0
   isCollidingWithShip: 0
   DetectSize: 150
   HPRestore: 20
