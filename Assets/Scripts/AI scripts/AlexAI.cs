@@ -6,11 +6,9 @@ public class AlexAI : BaseAI
 {
     private GameObject HealthBar;
     private GameObject Name;
-    
 
     public override IEnumerator RunAI()
     {
-        
         while (true)
         {
             yield return Ahead(300);
