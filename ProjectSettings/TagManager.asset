@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Trigger
   - Boat
+  - Wall
   layers:
   - Default
   - TransparentFX
