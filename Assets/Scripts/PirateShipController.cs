@@ -5,19 +5,22 @@ using UnityEngine;
 
 public class PirateShipController : MonoBehaviour
 {
-    public GameObject CannonBallPrefab = null;
-    public Transform CannonFrontSpawnPoint = null;
-    public Transform CannonLeftSpawnPoint = null;
-    public Transform CannonRightSpawnPoint = null;
-    public GameObject Lookout = null;
-    public GameObject[] sails = null;
+    public GameObject CannonBallPrefab;
+    public Transform CannonFrontSpawnPoint;
+    public Transform CannonLeftSpawnPoint;
+    public Transform CannonRightSpawnPoint;
+    public GameObject Lookout;
+    public GameObject[] sails;
     public GameObject Name;
     public GameObject HealthBar;
-    private BaseAI ai = null;
+    private BaseAI ai;
 
     private float BoatSpeed = 100.0f;
     private float SeaSize = 500.0f;
     private float RotationSpeed = 180.0f;
+
+    //Testing for colorchange
+
 
     #region New Code from Sean
     private int HPMax = 100;

@@ -18,43 +18,53 @@ public class BaseAI
         // 
     }
 
-    public IEnumerator Ahead(float distance) {
+    public IEnumerator Ahead(float distance)
+    {
         yield return Ship.__Ahead(distance);
     }
 
-    public IEnumerator Back(float distance) {
+    public IEnumerator Back(float distance)
+    {
         yield return Ship.__Back(distance);
     }
 
-    public IEnumerator TurnLookoutLeft(float angle) {
+    public IEnumerator TurnLookoutLeft(float angle)
+    {
         yield return Ship.__TurnLookoutLeft(angle);
     }
 
-    public IEnumerator TurnLookoutRight(float angle) {
+    public IEnumerator TurnLookoutRight(float angle)
+    {
         yield return Ship.__TurnLookoutRight(angle);
     }
 
-    public IEnumerator TurnLeft(float angle) {
+    public IEnumerator TurnLeft(float angle)
+    {
         yield return Ship.__TurnLeft(angle);
     }
 
-    public IEnumerator TurnRight(float angle) {
+    public IEnumerator TurnRight(float angle)
+    {
         yield return Ship.__TurnRight(angle);
     }
 
-    public IEnumerator FireFront(float power) {
+    public IEnumerator FireFront(float power)
+    {
         yield return Ship.__FireFront(power);
     }
 
-    public IEnumerator FireLeft(float power) {
+    public IEnumerator FireLeft(float power)
+    {
         yield return Ship.__FireLeft(power);
     }
 
-    public IEnumerator FireRight(float power) {
+    public IEnumerator FireRight(float power)
+    {
         yield return Ship.__FireRight(power);
     }
 
-    public virtual IEnumerator RunAI() {
+    public virtual IEnumerator RunAI()
+    {
         yield return null;
     }
 

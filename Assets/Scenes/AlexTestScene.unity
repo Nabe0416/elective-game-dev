@@ -2165,6 +2165,7 @@ GameObject:
   - component: {fileID: 7144346594613705183}
   - component: {fileID: 7144346594613705185}
   - component: {fileID: 7144346594613705186}
+  - component: {fileID: 7144346594613705187}
   m_Layer: 0
   m_Name: HitDummy
   m_TagString: Untagged
@@ -2312,6 +2313,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7144346594613705187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144346594613705182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb0bc6e07fe86f45992c8e6af34c2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ren: {fileID: 0}
+  mat: []
 --- !u!4 &7144346594614125952
 Transform:
   m_ObjectHideFlags: 0
