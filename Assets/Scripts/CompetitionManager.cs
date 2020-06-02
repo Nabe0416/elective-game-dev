@@ -6,7 +6,6 @@ public class CompetitionManager : MonoBehaviour
 {
     public GameObject PirateShipPrefab = null;
     public Transform[] SpawnPoints = null;
-
     private List<PirateShipController> pirateShips = new List<PirateShipController>();
 
     // Start is called before the first frame update
@@ -18,16 +17,13 @@ public class CompetitionManager : MonoBehaviour
             new SeanAI(), 
             new NoahAI()
         };
-
         for (int i = 0; i < 4; i++)
         {
-
                 GameObject pirateShip = Instantiate(PirateShipPrefab, SpawnPoints[i].position, SpawnPoints[i].rotation);
                 PirateShipController pirateShipController = pirateShip.GetComponent<PirateShipController>();
                 pirateShipController.SetAI(aiArray[i]);
                 pirateShips.Add(pirateShipController);
         }
-        
     }
 
     // Update is called once per frame
