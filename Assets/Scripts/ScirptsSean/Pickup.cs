@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PickupTypes
+{
+    None,
+    HP,
+    Invincible
+}
+
 public class Pickup : MonoBehaviour
 {
-    public enum PickupTypes
-    {
-        None,
-        HP,
-        Invincible
-    }
+
 
     [SerializeField]
     private PickupTypes PickupType;
@@ -39,5 +41,20 @@ public class Pickup : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+    }
+
+    public void SetTypeTo(PickupTypes pt)
+    {
+        this.PickupType = pt;
+    }
+
+    public void SetHPRestoreAmountTo(int i)
+    {
+        this.HPRestoreAmount = i;
+    }
+
+    public void SetInvincibleTimeTo(float i)
+    {
+        this.InvincibleTime = i;
     }
 }
