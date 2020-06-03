@@ -17,14 +17,14 @@ public class PirateShipController : MonoBehaviour
     private float SeaSize = 500.0f;
     private float RotationSpeed = 180.0f;
 
-    #region New Code from Sean
+    #region Sean's code
+    #region HP and pickups
     private int HPMax = 100;
     [SerializeField]
     private int CurrentHP;
 
     [SerializeField]
     private bool isInvincible;
-
     
     private void OnEnable()
     {
@@ -74,6 +74,22 @@ public class PirateShipController : MonoBehaviour
         isInvincible = false;
     }
 
+    #endregion
+    #region Lookout
+    [SerializeField]
+    private List<GameItems> objects = new List<GameItems>();
+
+    public void LookoutAddItem(GameItems gi)
+    {
+        objects.Add(gi);
+    }
+
+    public void LookoutRemoveItem(GameItems gi)
+    {
+        if (objects.Contains(gi))
+            objects.Remove(gi);
+    }
+    #endregion
     #endregion
 
     // Start is called before the first frame update
@@ -189,5 +205,9 @@ public class PirateShipController : MonoBehaviour
         }
     }
 
-    
+    #region Sean's code
+
+    #endregion
+
+
 }
