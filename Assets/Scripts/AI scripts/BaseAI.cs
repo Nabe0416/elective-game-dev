@@ -7,6 +7,13 @@ public class ScannedRobotEvent {
     public float Distance; 
 }
 
+public enum GameItems
+{
+    Enemy,
+    Pickup_HP,
+    Pickup_Invin
+}
+
 public class BaseAI
 {
     public PirateShipController Ship = null;
@@ -15,6 +22,12 @@ public class BaseAI
     public virtual void OnScannedRobot(ScannedRobotEvent e)
     {
         // 
+    }
+
+
+    public bool TargetsContain(out Vector3 position, GameItems gi)
+    {
+        return Ship.__TargetsContain(out position, gi);   
     }
 
     public IEnumerator Ahead(float distance) {

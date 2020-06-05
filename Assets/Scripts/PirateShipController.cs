@@ -11,6 +11,7 @@ public class PirateShipController : MonoBehaviour
     public Transform CannonRightSpawnPoint = null;
     public GameObject Lookout = null;
     public GameObject[] sails = null;
+
     private BaseAI ai = null;
 
     private float BoatSpeed = 100.0f;
@@ -77,17 +78,17 @@ public class PirateShipController : MonoBehaviour
     #endregion
     #region Lookout
     [SerializeField]
-    private List<GameItems> objects = new List<GameItems>();
+    public List<GameObject> objects = new List<GameObject>();
 
-    public void LookoutAddItem(GameItems gi)
+    public void LookoutAddItem(GameObject go)
     {
-        objects.Add(gi);
+        objects.Add(go);
     }
 
-    public void LookoutRemoveItem(GameItems gi)
+    public void LookoutRemoveItem(GameObject go)
     {
-        if (objects.Contains(gi))
-            objects.Remove(gi);
+        if (objects.Contains(go))
+            objects.Remove(go);
     }
     #endregion
     #endregion
@@ -121,6 +122,49 @@ public class PirateShipController : MonoBehaviour
             ai.OnScannedRobot(scannedRobotEvent);
         }
     }
+
+
+    #region Sean's code
+    public bool __TargetsContain(out Vector3 position, GameItems gi)
+    {
+        switch (gi)
+        {
+            case GameItems.Enemy:
+                foreach (GameObject go in objects)
+                {
+                    if (go.GetComponent<PirateShipController>())
+                    {
+                        position = go.transform.position;
+                        return true;
+                    }
+                }
+                break;
+            case GameItems.Pickup_HP:
+                foreach (GameObject go in objects)
+                {
+                    if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.HP)
+                    {
+                        position = go.transform.position;
+                        return true;
+                    }
+                }
+                break;
+            case GameItems.Pickup_Invin:
+                foreach (GameObject go in objects)
+                {
+                    if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.Invincible)
+                    {
+                        position = go.transform.position;
+                        return true;
+                    }
+                }
+                break;
+        }
+        position = new Vector3(0, 0, 0);
+        return false;
+    }
+    #endregion
+
 
     public IEnumerator __Ahead(float distance) {
         int numFrames = (int)(distance / (BoatSpeed * Time.fixedDeltaTime));
@@ -205,9 +249,6 @@ public class PirateShipController : MonoBehaviour
         }
     }
 
-    #region Sean's code
-
-    #endregion
 
 
 }
