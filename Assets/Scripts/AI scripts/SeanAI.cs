@@ -7,85 +7,31 @@ public class SeanAI : BaseAI
     private int RandomNumber = 0;
     public override IEnumerator RunAI()
     {
-        /*        for (int i = 0; i < 10; i++)
+        for(int i = 0; i < 100; i++)
+        {
+            if (TargetsContain(out Vector3 position, GameItems.Enemy))
+            {
+                Vector3 lko = (Ship.transform.position - Ship.GetComponentInChildren<LookoutCollider>().gameObject.transform.position).normalized;
+                Vector3 tar = (Ship.transform.position - position).normalized;
+                var angle = Vector3.Angle(lko, tar);
+                if (Vector3.Cross(lko, tar).z < 0)
                 {
-                    yield return Ahead(200);
-                    yield return FireFront(1);
-                    yield return TurnLookoutLeft(90);
-                    yield return TurnLeft(360);
-                    yield return FireLeft(1);
-                    yield return TurnLookoutRight(180);
-                    yield return Back(200);
-                    yield return FireRight(1);
-                    yield return TurnLookoutLeft(90);
-                    yield return TurnRight(90);
+                    yield return TurnLeft(angle);
+                    yield return TurnLookoutLeft(angle);
+                    yield return FireFront(1000);
+                    yield return Ahead(10);
+                }
+                else
+                {
+                    yield return TurnRight(angle);
+                    yield return TurnLookoutRight(angle);
+                    yield return FireFront(1000);
+                    yield return Ahead(10);
                 }
             }
-            */
-        {
-            while (true)
+            else
             {
-                #region MoveModes
-                if (RandomNumber == 0)
-                {
-                    yield return Ahead(100);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 1)
-                {
-                    yield return TurnLeft(180);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 2)
-                {
-                    yield return TurnRight(300);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 3)
-                {
-                    yield return Ahead(0);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 4)
-                {
-                    yield return Ahead(50);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 5)
-                {
-                    yield return Ahead(20);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 6)
-                {
-                    yield return Ahead(15);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 7)
-                {
-                    yield return Ahead(60);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                #endregion
-
-
-                #region FireModes
-                if (RandomNumber == 8)
-                {
-                    yield return FireFront(1);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 9)
-                {
-                    yield return FireLeft(1);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                if (RandomNumber == 10)
-                {
-                    yield return FireRight(1);
-                    RandomNumber = Random.Range(0, 10);
-                }
-                #endregion
+                yield return Ahead(25);
             }
         }
     }

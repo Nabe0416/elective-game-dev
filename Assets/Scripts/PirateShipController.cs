@@ -5,20 +5,25 @@ using UnityEngine;
 
 public class PirateShipController : MonoBehaviour
 {
-    public GameObject CannonBallPrefab;
-    public Transform CannonFrontSpawnPoint;
-    public Transform CannonLeftSpawnPoint;
-    public Transform CannonRightSpawnPoint;
-    public GameObject Lookout;
-    public GameObject[] sails;
+    private BaseAI ai;
+    public GameObject CannonBallPrefab = null;
+    public Transform CannonFrontSpawnPoint = null;
+    public Transform CannonLeftSpawnPoint = null;
+    public Transform CannonRightSpawnPoint = null;
+    public GameObject Lookout = null;
+    public GameObject[] sails = null;
+
+    private BaseAI ai = null;
     public GameObject Name;
     public GameObject HealthBar;
-    private BaseAI ai;
 
     private float BoatSpeed = 100.0f;
     private float SeaSize = 500.0f;
     private float RotationSpeed = 180.0f;
 
+
+    #region Sean's code
+    #region HP and pickups
     //Testing for colorchange
 
 
@@ -29,7 +34,6 @@ public class PirateShipController : MonoBehaviour
 
     [SerializeField]
     private bool isInvincible;
-
     
     private void OnEnable()
     {
@@ -83,6 +87,22 @@ public class PirateShipController : MonoBehaviour
     }
 
     #endregion
+    #region Lookout
+    [SerializeField]
+    public List<GameObject> objects = new List<GameObject>();
+
+    public void LookoutAddItem(GameObject go)
+    {
+        objects.Add(go);
+    }
+
+    public void LookoutRemoveItem(GameObject go)
+    {
+        if (objects.Contains(go))
+            objects.Remove(go);
+    }
+    #endregion
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +137,71 @@ public class PirateShipController : MonoBehaviour
             ai.OnScannedRobot(scannedRobotEvent);
         }
     }
+
+
+    #region Sean's code
+    public bool __TargetsContain(out Vector3 position, GameItems gi)
+    {
+        for(int i = 0; i < objects.Count; i++)
+        {
+            if(objects[i] == null)
+            {
+                objects.RemoveAt(i);
+            }
+        }
+
+        switch (gi)
+        {
+            case GameItems.Enemy:
+                foreach (GameObject go in objects)
+                {
+                    if(go != null)
+                    {
+                        if (go.GetComponent<PirateShipController>())
+                        {
+                            position = go.transform.position;
+                            return true;
+                        }
+                    }
+                }
+                break;
+            case GameItems.Pickup_HP:
+                foreach (GameObject go in objects)
+                {
+                    if(go != null)
+                    {
+                        if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.HP)
+                        {
+                            position = go.transform.position;
+                            return true;
+                        }
+                    }
+                }
+                break;
+            case GameItems.Pickup_Invin:
+                foreach (GameObject go in objects)
+                {
+                    if(go != null)
+                    {
+                        if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.Invincible)
+                        {
+                            position = go.transform.position;
+                            return true;
+                        }
+                    }
+                }
+                break;
+        }
+        position = new Vector3(0, 0, 0);
+        return false;
+    }
+
+    public int __GetHP()
+    {
+        return CurrentHP;
+    }
+    #endregion
+
 
     public IEnumerator __Ahead(float distance) {
         int numFrames = (int)(distance / (BoatSpeed * Time.fixedDeltaTime));
@@ -201,5 +286,6 @@ public class PirateShipController : MonoBehaviour
         }
     }
 
-    
+
+
 }

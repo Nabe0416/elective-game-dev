@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Sean's code
+
 public enum PickupTypes
 {
     None,
@@ -14,7 +16,7 @@ public class Pickup : MonoBehaviour
 
 
     [SerializeField]
-    private PickupTypes PickupType;
+    public PickupTypes PickupType;
 
     [SerializeField]
     private int HPRestoreAmount = 0;
