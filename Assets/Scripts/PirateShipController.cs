@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PirateShipController : MonoBehaviour
 {
-    private BaseAI ai;
+
     public GameObject CannonBallPrefab = null;
     public Transform CannonFrontSpawnPoint = null;
     public Transform CannonLeftSpawnPoint = null;
@@ -24,7 +24,7 @@ public class PirateShipController : MonoBehaviour
 
     #region Sean's code
     #region HP and pickups
-    //Testing for colorchange
+
 
 
     #region New Code from Sean
@@ -103,6 +103,7 @@ public class PirateShipController : MonoBehaviour
     }
     #endregion
     #endregion
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -110,7 +111,7 @@ public class PirateShipController : MonoBehaviour
         //Code Added by alex for healthbar
         HealthBar.GetComponentInChildren<TextMesh>().text = CurrentHP + " HP";
     }
-
+    //Testing for colorchange
     public void SetAI(BaseAI _ai) {
         ai = _ai;   
         ai.Ship = this;

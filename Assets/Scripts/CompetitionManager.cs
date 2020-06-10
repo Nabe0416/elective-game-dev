@@ -15,7 +15,7 @@ public class CompetitionManager : MonoBehaviour
             new IljaAI(), 
             new SeanAI(), 
             new AlexAI(), 
-            new PondAI()
+            new NoahAI()
         };
         for (int i = 0; i < 4; i++)
         {

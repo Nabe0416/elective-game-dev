@@ -14,6 +14,8 @@ public class SeanAI : BaseAI
                 Vector3 lko = (Ship.transform.position - Ship.GetComponentInChildren<LookoutCollider>().gameObject.transform.position).normalized;
                 Vector3 tar = (Ship.transform.position - position).normalized;
                 var angle = Vector3.Angle(lko, tar);
+                Debug.Log(angle);
+                Debug.Log(Vector3.Cross(lko, tar).z);
                 if (Vector3.Cross(lko, tar).z < 0)
                 {
                     yield return TurnLeft(angle);
@@ -21,11 +23,15 @@ public class SeanAI : BaseAI
                     yield return FireFront(1000);
                     yield return Ahead(10);
                 }
-                else
+                else if(Vector3.Cross(lko, tar).z > 0)
                 {
                     yield return TurnRight(angle);
                     yield return TurnLookoutRight(angle);
                     yield return FireFront(1000);
+                    yield return Ahead(10);
+                }
+                else
+                {
                     yield return Ahead(10);
                 }
             }
