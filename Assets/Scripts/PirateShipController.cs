@@ -18,6 +18,7 @@ public class PirateShipController : MonoBehaviour
     private float SeaSize = 500.0f;
     private float RotationSpeed = 180.0f;
 
+
     #region Sean's code
     #region HP and pickups
     private int HPMax = 100;
@@ -127,41 +128,63 @@ public class PirateShipController : MonoBehaviour
     #region Sean's code
     public bool __TargetsContain(out Vector3 position, GameItems gi)
     {
+        for(int i = 0; i < objects.Count; i++)
+        {
+            if(objects[i] == null)
+            {
+                objects.RemoveAt(i);
+            }
+        }
+
         switch (gi)
         {
             case GameItems.Enemy:
                 foreach (GameObject go in objects)
                 {
-                    if (go.GetComponent<PirateShipController>())
+                    if(go != null)
                     {
-                        position = go.transform.position;
-                        return true;
+                        if (go.GetComponent<PirateShipController>())
+                        {
+                            position = go.transform.position;
+                            return true;
+                        }
                     }
                 }
                 break;
             case GameItems.Pickup_HP:
                 foreach (GameObject go in objects)
                 {
-                    if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.HP)
+                    if(go != null)
                     {
-                        position = go.transform.position;
-                        return true;
+                        if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.HP)
+                        {
+                            position = go.transform.position;
+                            return true;
+                        }
                     }
                 }
                 break;
             case GameItems.Pickup_Invin:
                 foreach (GameObject go in objects)
                 {
-                    if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.Invincible)
+                    if(go != null)
                     {
-                        position = go.transform.position;
-                        return true;
+                        if (go.GetComponent<Pickup>() || go.GetComponent<Pickup>().PickupType == PickupTypes.Invincible)
+                        {
+                            position = go.transform.position;
+                            return true;
+                        }
                     }
                 }
                 break;
         }
         position = new Vector3(0, 0, 0);
         return false;
+    }
+
+    public int __GetHP()
+    {
+        return CurrentHP;
     }
     #endregion
 

@@ -6,41 +6,31 @@ public class SeanAI : BaseAI
 {
     public override IEnumerator RunAI()
     {
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < 100; i++)
         {
-            yield return Ahead(100);
             if (TargetsContain(out Vector3 position, GameItems.Enemy))
             {
-                float angle = Vector3.Angle(Ship.transform.position, position);
-                Debug.Log("Found enemy at " + position + " turn " + angle);
-                if (angle > 5)
+                Vector3 lko = (Ship.transform.position - Ship.GetComponentInChildren<LookoutCollider>().gameObject.transform.position).normalized;
+                Vector3 tar = (Ship.transform.position - position).normalized;
+                var angle = Vector3.Angle(lko, tar);
+                if (Vector3.Cross(lko, tar).z < 0)
                 {
-                    TurnLeft(5);
-                    if (Vector3.Angle(Ship.transform.position, position) > angle)
-                    {
-                        goto turnRight;
-                    }
-                    else
-                    {
-                        goto turnLeft;
-                    }
+                    yield return TurnLeft(angle);
+                    yield return TurnLookoutLeft(angle);
+                    yield return FireFront(1000);
+                    yield return Ahead(10);
                 }
-            turnRight:
+                else
                 {
-                    while (angle > 10)
-                    {
-                        TurnRight(5);
-                        angle = Vector3.Angle(Ship.transform.position, position);
-                    }
+                    yield return TurnRight(angle);
+                    yield return TurnLookoutRight(angle);
+                    yield return FireFront(1000);
+                    yield return Ahead(10);
                 }
-            turnLeft:
-                {
-                    while (angle > 10)
-                    {
-                        TurnLeft(5);
-                        angle = Vector3.Angle(Ship.transform.position, position);
-                    }
-                }
+            }
+            else
+            {
+                yield return Ahead(25);
             }
         }
     }

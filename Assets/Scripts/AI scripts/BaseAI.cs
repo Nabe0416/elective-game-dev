@@ -30,6 +30,11 @@ public class BaseAI
         return Ship.__TargetsContain(out position, gi);   
     }
 
+    public int GetHP()
+    {
+        return Ship.__GetHP();
+    }
+
     public IEnumerator Ahead(float distance) {
         yield return Ship.__Ahead(distance);
     }

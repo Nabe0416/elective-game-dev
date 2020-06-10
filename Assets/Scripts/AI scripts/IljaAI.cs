@@ -22,6 +22,6 @@ public class IljaAI : BaseAI
 
     public override void OnScannedRobot(ScannedRobotEvent e)
     {
-        Debug.Log("Ship detected: " + e.Name + " at distance: " + e.Distance);
+        //Debug.Log("Ship detected: " + e.Name + " at distance: " + e.Distance);
     }
 }
