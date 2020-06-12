@@ -45,7 +45,7 @@ public class SeanAI : BaseAI
                     if (TargetsContain(out _, GameItems.Enemy))
                         goto fire;
                 }
-                var rnd = Random.Range(-1, 1);
+                var rnd = Random.Range(-10, 10);
                 if(rnd > 0)
                 {
                     yield return TurnLeft(90);

@@ -25,7 +25,8 @@ public class PirateShipController : MonoBehaviour
     #region Sean's code
     #region HP and pickups
 
-
+    private float shootCooldown = 1.0f;
+    private float timeStamp;
 
     #region New Code from Sean
     private int HPMax = 100;
@@ -109,6 +110,7 @@ public class PirateShipController : MonoBehaviour
     void Start()
     {
         //Code Added by alex for healthbar
+        timeStamp = Time.time;
         HealthBar.GetComponentInChildren<TextMesh>().text = CurrentHP + " HP";
     }
     //Testing for colorchange
@@ -249,17 +251,29 @@ public class PirateShipController : MonoBehaviour
     }
 
     public IEnumerator __FireFront(float power) {
-        GameObject newInstance = Instantiate(CannonBallPrefab, CannonFrontSpawnPoint.position, CannonFrontSpawnPoint.rotation);
+        if(timeStamp <= Time.time)
+        {
+            GameObject newInstance = Instantiate(CannonBallPrefab, CannonFrontSpawnPoint.position, CannonFrontSpawnPoint.rotation);
+            timeStamp = Time.time + shootCooldown;
+        }
         yield return new WaitForFixedUpdate();
     }
 
     public IEnumerator __FireLeft(float power) {
-        GameObject newInstance = Instantiate(CannonBallPrefab, CannonLeftSpawnPoint.position, CannonLeftSpawnPoint.rotation);
+        if (timeStamp <= Time.time)
+        {
+            GameObject newInstance = Instantiate(CannonBallPrefab, CannonLeftSpawnPoint.position, CannonLeftSpawnPoint.rotation);
+            timeStamp = Time.time + shootCooldown;
+        }
         yield return new WaitForFixedUpdate();
     }
 
     public IEnumerator __FireRight(float power) {
-        GameObject newInstance = Instantiate(CannonBallPrefab, CannonRightSpawnPoint.position, CannonRightSpawnPoint.rotation);
+        if (timeStamp <= Time.time)
+        {
+            GameObject newInstance = Instantiate(CannonBallPrefab, CannonRightSpawnPoint.position, CannonRightSpawnPoint.rotation);
+            timeStamp = Time.time + shootCooldown;
+        }
         yield return new WaitForFixedUpdate();
     }
 
